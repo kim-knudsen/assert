@@ -1,0 +1,21 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "jsr:@std/assert": "jsr:@std/assert@0.219.0",
+      "jsr:@std/fmt@^0.219.0": "jsr:@std/fmt@0.219.0"
+    },
+    "jsr": {
+      "@std/assert@0.219.0": {
+        "integrity": "4dcd3cfc8a2f7a7fae5de404d728dfeb82cac6139e78a7358f07761b120ef956",
+        "dependencies": [
+          "jsr:@std/fmt@^0.219.0"
+        ]
+      },
+      "@std/fmt@0.219.0": {
+        "integrity": "6feaad847001b3eeda64e279aa49475b42e7c7c525a7a1b47fca8ffc0ee3418e"
+      }
+    }
+  },
+  "remote": {}
+}
