@@ -50,6 +50,15 @@ export function assertTruthy<T>(value: T, messageOrName?: string): asserts value
 /**
  * Useful for type narrowing assertions, especially when dealing with `null` or `undefined`.
  *
+ * ```ts
+ * import { assertIsDefined } from '@knudsen/assert'
+ *
+ * const user = await fetchUser()
+ * assertIsDefined(response.profileImage, 'profileImage')
+ *
+ * console.log(user.profileImage) // profileImage is now non-nullable
+ * ```
+ *
  * @param value The value to check for being defined.
  * @param messageOrName An optional message or name for the assertion.
  */
@@ -63,6 +72,26 @@ export function assertIsDefined<T>(value: T, messageOrName?: string): asserts va
 
         throw new AssertionError(message)
     }
+}
+
+/**
+ * Ensures/asserts that the given value is an instance of the given type and then returns that value.
+ *
+ * ```ts
+ * import { ensure } from '@knudsen/assert'
+ *
+ * const user = await fetchUser()
+ * const profileImage = ensure(response.profileImage, 'profileImage')
+ *
+ * console.log(profileImage) // profileImage is now non-nullable
+ * ```
+ *
+ * @param value The value to check for being an instance of the given type.
+ * @param messageOrName An optional message or name for the assertion.
+ */
+export function ensure<T>(value: T, messageOrName?: string): NonNullable<T> {
+    assertIsDefined(value, messageOrName)
+    return value
 }
 
 function createErrorMessage(messageOrName: string | undefined, config: CreateErrorMessageConfig) {
