@@ -18,5 +18,13 @@ jobs:
             id-token: write
         steps:
             - uses: actions/checkout@v4
+            - name: Get the version
+              id: get_version
+              run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+            - name: Install jq
+              run: sudo apt-get install jq
+            - name: Update version in deno.json
+              run: |
+                jq '.version = "${{ steps.get_version.outputs.VERSION }}"' deno.json > temp.json && mv temp.json deno.json
             - uses: denoland/setup-deno@v1
             - run: deno publish
